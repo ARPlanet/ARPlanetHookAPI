@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>Arplanet Webhook Demo js</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.2/fetch.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core-min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/cipher-core-min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/aes-min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js'></script>
+</head>
+
+<body>
+    <div id="output"></div>
+</body>
+<script>
+    function print(str) {
+        document.getElementById("output").innerHTML += str + '</br>';
+        console.log(str);
+    }
+    //event data
+    let encrytedData = "aes-256-cbc:5f241fa93bf62872:OoJ1u6wF8PZARv5a/XYW7+D0oYyWb3PN6v3vFbsECkKtZz+FML6bpW4PhVSEGh3YoDRYE9zHla1/eBATR6/Z2NDY3eC8oV1rGXQto8rT8m3C2YOfalu0RTj8VGKkfgGIT0eyLaV8ClmCtx7KdTnhKPsNpHAFwOyXCiRFRqInFQ316DF+/ecVDx/kuJIgRFSU4cOOjXsPaHUN7nPV0K6QRRa1ko27Yjor2ro9TuTHuLDZAneHK2s7H9jOO4XXUX/ZoOlqadd9hmozq2FMMc9lzOnKdjkt0BDioGnCm+3unl4C5PTMJ1WPFh8tMZPnBsdIKc/EDfhQNmHu4K1PCyqyxxNYACjt6u/YIwJBzu+xbAbaPkgmycIztNkqiz566/YdsGIX5siPGc/wBn7piwdNi39B0hGpTrLTn9Wsc5Na03o1kl7ZX49TyN7Ib9CNOcd2eYOTO9tBI2mJxgwwdz0q1Pj99BAhlANjeheGGNs6yrpFmy+iAqZYw9qU65No6P1Ca3whD0D2QpetP4aIthd6Bdd4hxCvUwW2fwRQyABdwnn/BV4TS/OF35oXvLhAv6q+1F9HY4ftNOHUNXqKM9RHZoadIYiNYyhNIQl4fpgoBIUE8ofGsZR2EHaFbjDFs6Y4cdsqfwiPtGCrFgbbqvDjILqRBO7/ME9Q3LJ1QBXtW5O7thiu9NyEQELdCrOrr10lx0XPgwOZDMCEFSeNKFOHlKpOygrsPUACU/us3ClOLF3YILSE0EB7bCenmkDFEgA3b1LYcmTtLOVFqllh2+dn4lNUcIFlLS5Z+/3K6WqKLkM=";
+    let encrytedDataArr = encrytedData.split(":");
+    let alg = encrytedDataArr[0];
+    let iv = encrytedDataArr[1];
+    let dat = encrytedDataArr[2];
+    let secretkey = "80dbe6cc182c891212baa3cdda5efac4";
+    print("【encrytedData】" + encrytedData);
+    print("【alg】" + alg);
+    print("【iv】" + iv);
+    print("【dat】" + dat);
+    print("【key】" + secretkey);
+    const parseData = function (dat, key, iv) {
+        const cipherParams = CryptoJS.lib.CipherParams.create({
+            ciphertext: CryptoJS.enc.Base64.parse(dat),
+        });
+        const decrypted = CryptoJS.AES.decrypt(
+            cipherParams,
+            CryptoJS.enc.Utf8.parse(key),
+            {
+                iv: CryptoJS.enc.Utf8.parse(iv),
+            }
+        );
+        console.log(decrypted.toString(CryptoJS.enc.Utf8));
+        return decrypted.toString(CryptoJS.enc.Utf8);
+    };
+
+    let finalData = parseData(dat, secretkey, iv);
+    print("【finalData】" + finalData);
+</script>
+
+</html>
