@@ -31,12 +31,12 @@
 
 - 每當有新的圖片上傳事件後後，我們會使用 Redirect 夾帶 `event_id`參數送至你所設定的 Webhook URL 網址。
 - 你必須使用取得的 `secret key` 組合成 `Webhook API`，格式如下：
-	- <https://5xu09k7c4c.execute-api.ap-southeast-1.amazonaws.com/prod/webhook/{VERSION}/{EVENTID}>
+	- <https://resource-api.arplanets.com/webhook/{VERSION}/{EVENTID}>
 - 版本號 (VERSION) 目前請使用 `v0`
 
 #####  🧡 Webhook API 範例 🧡
 ~~~
-https://5xu09k7c4c.execute-api.ap-southeast-1.amazonaws.com/prod/webhook/v0/winkiss.leeson123.12309c35dbd0c50e10a1ef70cc4a9e605fafc67dd3a6b5d3fc8ad57fb429dad0
+https://resource-api.arplanets.com/webhook/v0/winkiss.leeson123.12309c35dbd0c50e10a1ef70cc4a9e605fafc67dd3a6b5d3fc8ad57fb429dad0
 ~~~
 
 ---
